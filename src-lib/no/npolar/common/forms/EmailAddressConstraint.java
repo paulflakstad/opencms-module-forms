@@ -31,13 +31,13 @@ public class EmailAddressConstraint extends A_InputFormatConstraint {
      */
     @Override
     public boolean validate(I_FormInputElement element) {
-        matcher = this.pattern.matcher(element.getValue());
+        matcher = pattern.matcher(element.getValue());
         if (matcher.find()) {
-            this.error = null;
+            error = null;
             return true;
         }
-        //this.error = "Icorrect email format.";
-        this.error = Messages.get().container(Messages.MSG_FORMAT_REQUIRED_EMAIL_0).key(element.getContainingForm().getLocale());
+        // error = "Icorrect email format.";
+        error = Messages.get().container(Messages.MSG_FORMAT_REQUIRED_EMAIL_0).key(element.getContainingForm().getLocale());
         return false;
     }
 }

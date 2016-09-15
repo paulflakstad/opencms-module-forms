@@ -2,7 +2,6 @@ package no.npolar.common.forms;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.opencms.file.CmsObject;
 
 /**
  * Represents a form input field of <code>type="text</code>, that accepts 
@@ -15,11 +14,13 @@ public class InputTypeText extends A_InputTypeUserDefined {
     /** Holds the length of this text input field. */
     protected int length = -1;
     
+    public static final int MAX_LENGTH = 511;
+    
     /**
      * Creates a new text input element.
      */
-    public InputTypeText() { 
-        this.type = I_FormInputElement.TEXT;
+    public InputTypeText() {
+        type = I_FormInputElement.TEXT;
     }
     
     /**
@@ -106,16 +107,10 @@ public class InputTypeText extends A_InputTypeUserDefined {
     /**
      * @see I_FormInputElement#getTypeName() 
      */
-    @Override
+    /*@Override
     public String getTypeName() {
-        if (this.formatConstraint != null && this.formatConstraint instanceof EmailAddressConstraint) {
-            return "email";
-        }
-        else if (this.formatConstraint != null && this.formatConstraint instanceof NumericConstraint) {
-            return "number";
-        }
-        return "text"; 
-    }
+        return "text";
+    }*/
     
     /**
      * Determines if the user has entered anything.
@@ -146,11 +141,20 @@ public class InputTypeText extends A_InputTypeUserDefined {
             this.hasValidSubmit = false; // Ambiguous submit (too many values, should be only one)
             //this.error = "Too many values submitted.";
             this.error = Messages.get().container(Messages.ERR_TOO_MANY_VALUES_0).key(this.getContainingForm().getLocale());
-        } else if (this.required && values[0].trim().length() == 0) {
+        } 
+        
+        else if (this.required && values[0].trim().length() == 0) {
             this.hasValidSubmit = false; // Field is required, but value is missing (or only whitespace)
             //this.error = "This is a required field, it cannot be empty.";
             this.error = Messages.get().container(Messages.ERR_REQUIRED_FIELD_MISSING_0).key(this.getContainingForm().getLocale());
-        } else {
+        } 
+        
+        else if (values[0].trim().length() > getMaxLength()) {
+            this.hasValidSubmit = false;
+            this.error = Messages.get().container(Messages.ERR_VALUE_TOO_LONG_1, String.valueOf(getMaxLength())).key(this.getContainingForm().getLocale());
+        }
+        
+        else {
             // Assume the submission is OK
             this.submission = values;
             try {
@@ -210,5 +214,16 @@ public class InputTypeText extends A_InputTypeUserDefined {
                 }
             }
         }
+    }
+    
+    /**
+     * @see I_FormInputElement#getMaxLength()
+     */
+    @Override
+    public int getMaxLength() {
+        if (length > 0 && length < MAX_LENGTH) {
+            return length;
+        }
+        return this.MAX_LENGTH;
     }
 }

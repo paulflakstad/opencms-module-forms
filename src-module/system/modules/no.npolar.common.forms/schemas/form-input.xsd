@@ -44,7 +44,7 @@
         <xsd:appinfo>
             <resourcebundle name="no.npolar.common.form.workplace"/>
             <layouts>
-                <layout element="Type" widget="SelectorWidget" configuration="Text|Text-area|Drop-down|Checkbox|Radiobutton|Date-time|Country"/>
+                <layout element="Type" widget="SelectorWidget" configuration="Text|Text-area|Drop-down|Checkbox|Radiobutton|Date-time|Country|Password|Email|Number"/>
                 <layout element="Information" widget="HtmlWidget" configuration="height:100px,link,source,format"/>
                 <layout element="Constraint" widget="SelectorWidget" configuration="EmailAddressConstraint|DateTimeFormatConstraint|NumericConstraint" />
             </layouts>

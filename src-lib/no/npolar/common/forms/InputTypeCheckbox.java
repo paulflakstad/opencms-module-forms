@@ -12,6 +12,8 @@ import java.util.Arrays;
  */
 public class InputTypeCheckbox extends A_InputTypeMultiSelect {
     
+    public static final int MAX_LENGTH = 511;
+    
     /**
      * Creates a new, blank <code>checkbox</code> input element.
      */
@@ -61,10 +63,10 @@ public class InputTypeCheckbox extends A_InputTypeMultiSelect {
     /**
      * @see I_FormInputElement#getTypeName() 
      */
-    @Override
+    /*@Override
     public String getTypeName() {
         return "checkbox";
-    }
+    }*/
     
     /**
      * @see I_FormInputElement#getHtml(boolean) 
@@ -162,5 +164,13 @@ public class InputTypeCheckbox extends A_InputTypeMultiSelect {
             this.hasValidSubmit = true;
             this.error = null;
         }
+    }
+    
+    /**
+     * @see I_FormInputElement#getMaxLength()
+     */
+    @Override
+    public int getMaxLength() {
+        return MAX_LENGTH;
     }
 }

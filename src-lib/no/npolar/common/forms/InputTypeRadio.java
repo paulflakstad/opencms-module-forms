@@ -10,6 +10,8 @@ import java.util.ArrayList;
  */
 public class InputTypeRadio extends A_InputTypeSingleSelect {
     
+    public static final int MAX_LENGTH = 127;
+    
     /**
      * Creates a new, blank <code>radio</code> input element.
      */
@@ -95,7 +97,15 @@ public class InputTypeRadio extends A_InputTypeSingleSelect {
     /**
      * @see I_FormInputElement#getTypeName() 
      */
-    public String getTypeName() {
+    /*public String getTypeName() {
         return "radio";
+    }*/
+    
+    /**
+     * @see I_FormInputElement#getMaxLength()
+     */
+    @Override
+    public int getMaxLength() {
+        return this.MAX_LENGTH;
     }
 }

@@ -126,15 +126,40 @@ public class Form implements Comparable {
     /** Holds the confirmation email. */
     private AutoEmail confirmationEmail = null;
     
-    /** The supported input field types, indexed to match the integer values returned by {@link I_FormInputElement#getType()}. */
-    public static final String[] FORM_INPUT_TYPES = { "Text",
-                                                    "Text-area",
-                                                    "Drop-down",
-                                                    "Checkbox",
-                                                    "Radiobutton",
-                                                    "Date-time",
-                                                    "Country",
-                                                    "Password" };
+    /**
+     * All input type names, indexed to match each input type's ID, as returned
+     * by {@link I_FormInputElement#getType()}.
+     */
+    public static final String[] FORM_INPUT_TYPE_NAMES = {
+        "text",     // 0 Text
+        "textarea", // 1 Text-area
+        "select",   // 2 Drop-down
+        "checkbox", // 3 Checkbox
+        "radio",    // 4 Radiobutton
+        "text",     // 5 Date-time
+        "select",   // 6 Country
+        "password", // 7 Password
+        "email",    // 8 Email
+        "number"    // 9 Number
+    };
+    
+    /** 
+     * The supported input types, as defined in OpenCms, and indexed to match 
+     * each input type's ID, as returned by 
+     * {@link I_FormInputElement#getType()}. 
+     */
+    public static final String[] FORM_INPUT_TYPES = { 
+        "Text",         // 0
+        "Text-area",    // 1
+        "Drop-down",    // 2
+        "Checkbox",     // 3
+        "Radiobutton",  // 4
+        "Date-time",    // 5
+        "Country",      // 6
+        "Password",     // 7
+        "Email",        // 8
+        "Number"        // 9
+    };
     
     /**
      * Constructor - creates a new form by reading the form resource.
@@ -412,6 +437,9 @@ public class Form implements Comparable {
      * <li>select</li>
      * <li>checkbox</li>
      * <li>radio</li>
+     * <li>password</li>
+     * <li>email</li>
+     * <li>number</li>
      * <p>
      * Options are options for the <code>select</code> type, for 
      * <code>checkbox</code> and <code>radio</code> types, the options represent
@@ -496,6 +524,12 @@ public class Form implements Comparable {
                 break;
             case I_FormInputElement.PASSWORD:
                 element = new InputTypePassword(name, label, required, this);
+                break;
+            case I_FormInputElement.EMAIL:
+                element = new InputTypeEmail(name, label, required, this);
+                break;
+            case I_FormInputElement.NUMBER:
+                element = new InputTypeNumber(name, label, required, this);
                 break;
             default:
                 break;
@@ -823,9 +857,12 @@ public class Form implements Comparable {
             preview += "<div class=\"element\">" +
                         "<div class=\"label\">" + element.getLabel() + "</div>" +
                             "<div class=\"input\">"; 
-            if (element.getType() == I_FormInputElement.TEXT || 
-                    element.getType() == I_FormInputElement.TEXTAREA ||
-                    element.getType() == I_FormInputElement.DATETIME) { // Procedure for non-option elements
+            
+            // Procedure for non-option elements:
+            if (!element.hasOptions()) {
+            //if (element.getType() == I_FormInputElement.TEXT || 
+            //        element.getType() == I_FormInputElement.TEXTAREA ||
+            //        element.getType() == I_FormInputElement.DATETIME) { 
                 submittedValues = element.getSubmission(); // Get the submitted values (for these element types, there should be only one value)
                 if (submittedValues != null) {
                     for (int i = 0; i < submittedValues.length; i++) {
@@ -839,7 +876,8 @@ public class Form implements Comparable {
                     preview += "&ndash;"; // Print a "-" if no value was submitted
                 }
             }
-            else { // Procedure for option elements
+            // Procedure for option elements:
+            else { 
                 options = element.getOptions(); // Get element options
                 Option opt = null;
                 String optString = "";

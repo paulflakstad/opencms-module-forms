@@ -12,22 +12,57 @@ import java.sql.SQLException;
  */
 public interface I_FormInputElement {
     
-    /** Constant for the form input type "text" */
+    /** Type ID for input type "text". 
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
     static final int TEXT = 0;
-    /** Constant for the form input type "text area" */
+    /** 
+     * Type ID for input type "text area". 
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
     static final int TEXTAREA = 1;
-    /** Constant for the form input type "select" */
+    /** 
+     * Type ID for input type "select".
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
     static final int SELECT = 2;
-    /** Constant for the form input type "checkbox" */
+    /** 
+     * Type ID for input type "checkbox". 
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
     static final int CHECKBOX = 3;
-    /** Constant for the form input type "radio" */
+    /** 
+     * Type ID for input type "radio".
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
     static final int RADIO = 4;
-    /** Constant for the form input type "datetime" */
+    /**
+     * Type ID for input type "datetime".
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
     static final int DATETIME = 5;
-    /** Constant for the form input type "select single country" (special case of a normal drop-down) */
+    /**
+     * Type ID for input type "select single country" (special case of a normal drop-down).
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
     static final int SELECT_SINGLE_COUNTRY = 6;
-    /** Constant for the form input type "password" */
+    /**
+     * Type ID for input type "password".
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
     static final int PASSWORD = 7;
+    /**
+     * Type ID for input type "email".
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
+    static final int EMAIL = 8;
+    /**
+     * Type ID for input type "number".
+     * @see {@link FormSqlManager#SQL_DEFINITIONS_FOR_INPUT_TYPES}. 
+     */
+    static final int NUMBER = 9;
+    
+    
     /** Constant for the package name */
     public static final String PACKAGE_NAME = "no.npolar.common.forms";
     
@@ -118,6 +153,7 @@ public interface I_FormInputElement {
      * @return  The <code>name</code> and <code>type</code> attributes for this input element.
      */
     public String getNameAndIdHtmlAttributes();
+    
     /**
      * Determines whether this form element has a valid submitted value.
      * <p>
@@ -129,11 +165,35 @@ public interface I_FormInputElement {
     public boolean hasValidSubmit();
     
     /**
+     * Determines whether this form element has a valid value length.
+     * <p>
+     * This is to ensure we don't try to squeeze in a too-long value in a 
+     * too-small table cell in the database.
+     * 
+     * @return  <code>true</code> if this element has a valid value length, <code>false</code> if not.
+     */
+    public boolean hasValidLength();
+    
+    /**
+     * Gets the maximum allowed length for the submitted value.
+     * 
+     * @return  the maximum allowed length for the submitted value.
+     */
+    public int getMaxLength();
+    
+    /**
      * Determines whether this form element has an information text or not.
      * 
      * @return  <code>true</code> if this element has an information text, <code>false</code> if not.
      */
     public boolean hasInformationText();
+    
+    /**
+     * Determines whether this form element has options or not.
+     * 
+     * @return  <code>true</code> if this element has options, <code>false</code> if not.
+     */
+    public boolean hasOptions();
     
     /**
      * Determines whether this form element has a help text or not.
@@ -226,6 +286,20 @@ public interface I_FormInputElement {
      * @param information  The information text to display for this form element.
      */
     public void setInformation(String information);
+    
+    /**
+     * Sets a constraint class for this form element.
+     * <p>
+     * The constraint class, identified by the given class name, must implement 
+     * {@link I_InputFormatConstraint}, and should extend 
+     * {@link A_InputFormatConstraint}.
+     * 
+     * @param constraintClassName  The constraint class name, must implement {@link I_InputFormatConstraint}.
+     * @return <code>true</code> if the constraint is added OK, <code>false</code> if something goes wrong.
+     * @see I_InputFormatConstraint
+     * @see A_InputFormatConstraint
+     */
+    public boolean setConstraint(String constraintClassName);
     
     /**
      * Sets the form element's uniqueness.

@@ -14,11 +14,11 @@ import java.text.ParseException;
  */
 public class InputTypeDateTime extends InputTypeText {
     
-    /** Member variable that holds a Date representation of this datetime */
+    /** Holds a date representation of this datetime. */
     private Date date = null;
-    /** Member variable that holds the date format used by this datetime element */
+    /** Holds the date format used by this datetime element. */
     private SimpleDateFormat sdf;
-    /** Constant string representation of the standard MySQL datetime format */
+    /** String representation of the standard MySQL datetime format. */
     private static final String MYSQL_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     
     /**
@@ -140,10 +140,10 @@ public class InputTypeDateTime extends InputTypeText {
     /**
      * @see I_FormInputElement#getTypeName
      */
-    @Override
+    /*@Override
     public String getTypeName() {
         return "text";
-    }
+    }*/
     
     /**
      * @see I_FormInputElement#recreate(java.sql.ResultSet) 

@@ -20,6 +20,7 @@ public class Messages extends A_CmsMessageBundle {
     public static final String ERR_REQUIRED_FIELD_MISSING_0 = "ERR_REQUIRED_FIELD_MISSING_0";
     public static final String ERR_DUPLICATE_VALUE_1 = "ERR_DUPLICATE_VALUE_1";
     public static final String ERR_NO_VALUE_0 = "ERR_NO_VALUE_0";
+    public static final String ERR_VALUE_TOO_LONG_1 = "ERR_VALUE_TOO_LONG_1";
     public static final String ERR_SET_CONSTRAINT_1 = "ERR_SET_CONSTRAINT_1";
     public static final String ERR_REPORT_NO_FORM_URI_0 = "ERR_REPORT_NO_FORM_URI_0";
     public static final String ERR_REPORT_INVALID_FORM_URI_1 = "ERR_REPORT_INVALID_FORM_URI_1";

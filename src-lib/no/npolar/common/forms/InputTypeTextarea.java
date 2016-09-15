@@ -19,6 +19,8 @@ public class InputTypeTextarea extends A_InputTypeUserDefined {
     /** The number of rows in the <code>textarea</code>. element */
     private int rows = 4;
     
+    public static final int MAX_LENGTH = 2047;
+    
     /**
      * Creates a new text area input element.
      */
@@ -63,9 +65,9 @@ public class InputTypeTextarea extends A_InputTypeUserDefined {
     /**
      * @see I_FormInputElement#getTypeName() 
      */
-    public String getTypeName() {
-        return null; // or should we return "textarea"..?
-    }
+    /*public String getTypeName() {
+        return "text"; // or should we return "textarea"..?
+    }*/
     
     /**
      * Gets the HTML code for this form element.
@@ -169,5 +171,13 @@ public class InputTypeTextarea extends A_InputTypeUserDefined {
                 }
             }
         }
+    }
+    
+    /**
+     * @see I_FormInputElement#getMaxLength()
+     */
+    @Override
+    public int getMaxLength() {
+        return this.MAX_LENGTH;
     }
 }

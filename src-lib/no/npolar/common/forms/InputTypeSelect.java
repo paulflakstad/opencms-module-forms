@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Paul-Inge Flakstad, Norwegian Polar Institute
  */
 public class InputTypeSelect extends A_InputTypeSingleSelect {
-    
+    public static final int MAX_LENGTH = 127;
     /**
      * Creates a new <code>select</code> input element.
      */
@@ -82,9 +82,17 @@ public class InputTypeSelect extends A_InputTypeSingleSelect {
     /**
      * @see I_FormInputElement#getTypeName() 
      */
-    public String getTypeName() {
+    /*public String getTypeName() {
         // Note: null is also a candidate, but this way it can be used as part 
         // of the class attribute
         return "select"; 
+    }*/
+    
+    /**
+     * @see I_FormInputElement#getMaxLength()
+     */
+    @Override
+    public int getMaxLength() {
+        return this.MAX_LENGTH;
     }
 }

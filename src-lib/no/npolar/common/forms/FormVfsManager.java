@@ -234,9 +234,13 @@ public class FormVfsManager {
             int inputType = inputTypes.indexOf(inputTypeCV.getStringValue(cmso));
 
             // Don't want to add options to form elements that should not have options, so set options to NULL
-            if (inputType == I_FormInputElement.TEXT || 
-                    inputType == I_FormInputElement.TEXTAREA || 
-                    inputType == I_FormInputElement.DATETIME) {
+            if (inputType == I_FormInputElement.TEXT
+                    || inputType == I_FormInputElement.TEXTAREA
+                    || inputType == I_FormInputElement.DATETIME 
+                    || inputType == I_FormInputElement.PASSWORD
+                    || inputType == I_FormInputElement.EMAIL
+                    || inputType == I_FormInputElement.NUMBER
+                    ) {
                 options = null;
             }
 
@@ -254,8 +258,7 @@ public class FormVfsManager {
                 form.validateUniqueField(addedElement.getName());
                 addedElement.setUnique(Boolean.parseBoolean(inputUniqueContentCV.getStringValue(cmso)));
             }
-            
-            
+                        
             // Set constraint, but only for InputTypeText
             if (inputConstraintCV != null) {
                 if (inputType == I_FormInputElement.TEXT) {
@@ -273,9 +276,10 @@ public class FormVfsManager {
                 }
             }
             
-            // Add the "length" attribute, if the element is of type TEXT
+            // Add the "length" attribute, if the element is of type text
             if (inputLengthCV != null) {
-                if (addedElement.getType() == I_FormInputElement.TEXT) {
+                if (addedElement instanceof InputTypeText) {
+                //if (addedElement.getType() == I_FormInputElement.TEXT) {
                     ((InputTypeText)addedElement).setLength(Integer.parseInt(inputLengthCV.getStringValue(cmso)));
                 }
             }

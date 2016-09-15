@@ -66,4 +66,11 @@ public abstract class A_InputTypeUserDefined extends A_FormInputElement {
      */
     @Override
     public void setUnique(boolean unique) { this.unique = unique; }
+    
+    /**
+     * @return  Always returns <code>false</code>.
+     * @see I_FormInputElement#hasOptions() 
+     */
+    @Override
+    public boolean hasOptions() { return false; }
 }

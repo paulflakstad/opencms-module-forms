@@ -84,6 +84,14 @@ public abstract class A_FormInputElement implements I_FormInputElement {
     public int getType() { return this.type; }
     
     /**
+     * @see I_FormInputElement#getTypeName()
+     */
+    @Override
+    public String getTypeName() { 
+        return Form.FORM_INPUT_TYPE_NAMES[this.getType()]; 
+    }
+    
+    /**
      * @see I_FormInputElement#getLabel() 
      */
     @Override
@@ -119,7 +127,20 @@ public abstract class A_FormInputElement implements I_FormInputElement {
      * @see I_FormInputElement#hasValidSubmit() 
      */
     @Override
-    public boolean hasValidSubmit() { return this.hasValidSubmit; }
+    public boolean hasValidSubmit() {
+        return this.hasValidSubmit;
+    }
+    
+    /**
+     * @see I_FormInputElement#hasValidLength() 
+     */
+    public boolean hasValidLength() {
+        try {
+            return this.getValue().length() <= this.getMaxLength();
+        } catch (NullPointerException npe) {
+            return true;
+        }
+    }
     
     /**
      * @see I_FormInputElement#hasInformationText() 
@@ -271,6 +292,7 @@ public abstract class A_FormInputElement implements I_FormInputElement {
      * @param constraintClassName the constraint class' name. It is assumed that the class resides in this package if the class name is not fully qualified.
      * @return <code>true</code> if the constraint is added OK, <code>false</code> if something goes wrong.
      */
+    @Override
     public boolean setConstraint(String constraintClassName) {
         String qualifiedConstraintClassName = constraintClassName;
         if (!constraintClassName.contains(".")) {
@@ -282,9 +304,9 @@ public abstract class A_FormInputElement implements I_FormInputElement {
             return true;
         } catch (Exception e) {
             if (LOG.isErrorEnabled()) {
-                LOG.error(Messages.get().container(Messages.ERR_CONSTRAINT_CLASS_NOT_FOUND_1, qualifiedConstraintClassName));
-                throw new NullPointerException("Exception: could not add the constraint \"" + 
-                        qualifiedConstraintClassName + "\" to \"" + this.name + "\": " + e.getMessage());
+                LOG.error(Messages.get().container(Messages.ERR_CONSTRAINT_CLASS_NOT_FOUND_1, qualifiedConstraintClassName), e);
+                /*throw new NullPointerException("Exception: could not add the constraint \"" + 
+                        qualifiedConstraintClassName + "\" to \"" + this.name + "\": " + e.getMessage());*/
             }
             return false;
         }

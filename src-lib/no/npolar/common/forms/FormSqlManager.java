@@ -56,17 +56,19 @@ public class FormSqlManager {
     
     /** 
      * The default database field definitions for the different input types, 
-     * indexed equal to I_FormInputElement's integer values for input types.
+     * indexed equal to the type IDs in {@link I_FormInputElement}.
      */
     public static final String[] SQL_DEFINITIONS_FOR_INPUT_TYPES = { 
-        "VARCHAR(512)",     // text
-        "VARCHAR(2048)",    // textarea
-        "VARCHAR(128)",     // select
-        "VARCHAR(512)",     // checkbox
-        "VARCHAR(128)",     // radio
-        "DATETIME",         // datetime
-        "VARCHAR(512)",     // country
-        "VARCHAR(512)"      // password
+        "VARCHAR(" + InputTypeText.MAX_LENGTH + ")",                // text 511
+        "VARCHAR(" + InputTypeTextarea.MAX_LENGTH + ")",            // textarea 2047
+        "VARCHAR(" + InputTypeSelect.MAX_LENGTH + ")",              // select 127
+        "VARCHAR(" + InputTypeCheckbox.MAX_LENGTH + ")",            // checkbox 511
+        "VARCHAR(" + InputTypeRadio.MAX_LENGTH + ")",               // radio 127
+        "DATETIME",                                                 // datetime
+        "VARCHAR(" + InputTypeSelectSingleCountry.MAX_LENGTH + ")", // country 511
+        "VARCHAR(" + InputTypePassword.MAX_LENGTH + ")",            // password 511
+        "VARCHAR(" + InputTypeEmail.MAX_LENGTH + ")",               // email 127
+        "VARCHAR(" + InputTypeNumber.MAX_LENGTH + ")"               // number 127
     };
     
     /**
@@ -274,7 +276,14 @@ public class FormSqlManager {
                     statement += ";";
                     ps = sqlAgent.getConnection().prepareStatement(statement);  // Prepare the statement
                 }
-                result = ps.execute() == false ? 0 : -1; // Execute the statement - the execute() call should return false
+                
+                try {
+                    result = ps.execute() == false ? 0 : -1; // Execute the statement - the execute() call should return false
+                } catch (Exception e) {
+                    SQLException sqle = new SQLException("Error creating table '" + tableName + "' for form. Statement was: " + ps);
+                    sqle.initCause(e);
+                    throw sqle;
+                }
                 break;
                 
                 

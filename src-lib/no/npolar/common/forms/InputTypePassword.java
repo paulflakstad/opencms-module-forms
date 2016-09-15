@@ -74,8 +74,8 @@ public class InputTypePassword extends InputTypeText {
     /**
      * @see I_FormInputElement#getTypeName() 
      */
-    @Override
+    /*@Override
     public String getTypeName() {
         return "password";
-    }
+    }*/
 }

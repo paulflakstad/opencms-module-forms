@@ -108,6 +108,13 @@ public abstract class A_InputTypePreDefined extends A_FormInputElement {
     public boolean isPreDefinedValueInput() { return true; }
     
     /**
+     * @see I_FormInputElement#hasOptions() 
+     * @return Always returns <code>true</code>.
+     */
+    @Override
+    public boolean hasOptions() { return true; }
+    
+    /**
      * Comparator used to sort options by their display text (label) 
      * alphabetically.
      * 
