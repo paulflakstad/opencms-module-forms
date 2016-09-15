@@ -1,33 +1,116 @@
-/* Default styles for Forms (no.npolar.common.form) */
-.form { display:block; overflow:auto; /*border:1px solid #dddddd;*/ background-color:#f5f5f5; margin-bottom:1em; width:100%; }
-.form .element { overflow:auto; margin:0; padding:0.5em; }
-.form .element .label { /*float:left; width:30%;*/ padding-top:0.5em; display:block; }
-.form .element .errormsg,
-.form .element .help-text { float:none; clear:both; font-family:sans-serif; display:block; font-size:0.75em; }
-.form .element .help-text { font-style:italic; }
-.form .element .input label { font-size:0.75em; }
-.form .element .input { float:left; clear:right; width:98%; max-width:35em; }
-.form .element input { margin:0; vertical-align:middle; }
-.form .submit { /*float:left;*/ clear:both; padding: 1em 0; text-align: center;}
+/******************************************************************************* 
+ *
+ *              Default styles for forms in no.npolar.common.form
+ *                  (in serious need of cleanup & rewrites)
+ *
+ */
+.form {
+    display: block;
+    overflow: auto;
+    background-color: #f5f5f5;
+    margin-bottom:1em;
+    width:100%;
+}
 
-.form .input.text input { width:100%; }
-.form .input.text-area { float:none; clear:both; width:100%; max-width:none; }
-.form .input.text-area textarea { width: 99.6%; max-width: 99.6%; height: 8em; }
+.form .element {
+    overflow: auto;
+    margin: 0;
+    padding: 0.5em;
+}
+
+.form .element .label {
+    padding-top: 0.5em;
+    display: block;
+}
+
+.form .element .errormsg,
+.form .element .help-text {
+    float: none;
+    clear: both;
+    font-family: sans-serif;
+    display: block;
+    font-size: 0.75em;
+}
+
+.form .element .help-text {
+    font-style: italic;
+}
+
+.form .element .input label {
+    font-size: 0.75em;
+}
+
+.form .element .input {
+    float: left;
+    clear: right;
+    width: 98%;
+    max-width:35em;
+}
+.form .element input {
+    margin: 0;
+    vertical-align: middle;
+}
+.form .submit {
+    clear: both;
+    padding: 1em 0;
+    text-align: center;
+}
+
 .form .input.text input,
+.form .input.email input,
+.form .input.password input {
+    width: 100%; 
+}
+
+.form .input.text-area {
+    float: none;
+    clear: both;
+    width: 100%;
+    max-width: none;
+}
+
+.form .input.text-area textarea { 
+    width: 99.6%; 
+    max-width: 99.6%; 
+    height: 8em;
+}
+
+.form .input.text input,
+.form .input.password input,
+.form .input.email input,
+.form .input.number input,
 .form .input textarea,
-.form .input select { border:1px solid #ddd; border-radius:3px; }
+.form .input select { 
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
 .form .input.text input:focus,
-.form .input.checkbox input:focus,
+.form .input.password input:focus,
+.form .input.email input:focus,
+.form .input.number input:focus,
+.form .input input:focus,
 .form .input textarea:focus,
-.form .input select:focus { outline:none; border:1px solid #3399ff; box-shadow:0 0 3px #3399ff; }
+.form .input select:focus {
+    outline: none;
+    border: 1px solid #39f;
+    box-shadow: 0 0 3px #39f;
+}
+
 .form .input.checkbox label:after,
 .form .input.radiobutton label:after {
     clear: both;
     content: " ";
     display: block;
 }
+
 .form .input.text input,
-.form .input select { padding:0.3em; }
+.form .input.password input,
+.form .input.email input,
+.form .input.number input,
+.form .input select {
+    padding:0.3em;
+}
 
 .form fieldset.form-element {
     border: 1px solid #ddd;
@@ -37,119 +120,162 @@
 .form .form-element--has-error .input input,
 .form fieldset.form-element--has-error {
     background-color: rgba(255, 0, 0, 0.05);
-    border-color: #a55;
+    /*border-color: #a55;*/
+    border-color: #ec2222;
 }
 
-/*form input {  font-family:inherit; font-size:0.85em; }*/
-
 div.formerror, 
-div.form .error { padding:0.2em; }
+div.form .error {
+    padding: 0.2em;
+}
 
-div.form .required { padding-right:0.2em; }
+div.form .required {
+    padding-right: 0.2em;
+}
 
 div.form .error,
 div.form .errormsg,
-div.formerror { color:#aa0000; }
+div.formerror {
+    color: #a00;
+}
 
-.form .element h3 { margin:1em 0 0 0; padding:0 0 0.5em 0; }
-.form .information {  }
+.form .element h3 {
+    margin: 1em 0 0 0;
+    padding: 0 0 0.5em 0;
+}
 
-.box { border:1px solid #dddddd; background:#eeeeee; padding:1em; }
-.message { text-align:center; }
+h1 + .form_text {
+    display: block;
+    padding: 1em 0;
+    margin-bottom: 1em;
+    font-size: larger;
+}
 
-.formerror.box.message { padding:1em; border:1px solid #600; background:#cd0101; color:#fff; border-radius:3px; font-weight:bold; font-size:0.8em; box-shadow:0 0 12px #600 inset; }
+.box {
+    border: 1px solid #ddd;
+    background: #eee;
+    padding: 1em;
+}
+.message {
+    text-align:center;
+}
 
-.form.submit-preview .element .label { font-weight:bold; }
-.form.submit-preview .element { font-size:0.8em; }
+.formerror.box.message {
+    padding: 3em;
+    background: #cd0101;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
 
+.form.submit-preview .element .label {
+    font-weight: bold;
+}
 
+.form.submit-preview .element {
+    font-size: 0.8em;
+}
 
-
-
-
+/*******************************************************************************
+ *
+ * Form view & filtering
+ *
+ */
 #form-view-filters {
-	margin:0 0 1em 0;
-	background:#eee;
-	border:1px solid #ddd;
-	overflow:auto;
+    margin: 0 0 1em 0;
+    background: #eee;
+    border: 1px solid #ddd;
+    overflow: auto;
 }
+
 #form-view-filters-toggle {
-	background-color:#eee;
-	display:inline-block;
-	padding:0.25em 2em 0.25em 0.25em;
-	border:1px solid #ddd;
-	margin-bottom:-1px;
-	font-size:0.8em;
-	font-weight:bold;
+    background-color: #eee;
+    display: inline-block;
+    padding: 0.25em 2em 0.25em 0.25em;
+    border: 1px solid #ddd;
+    margin-bottom: -1px;
+    font-size: 0.8em;
+    font-weight: bold;
 }
+
 #form-view-filters-toggle.slide-up {
-	border-bottom:none;
+    border-bottom: none;
 }
+
 .slide-up,
 .slide-down {
-	cursor:pointer;
-	background-image:url(arrow-up-12-12.png);
-	background-position:center right;
-	background-repeat:no-repeat;
+    cursor: pointer;
+    background-image: url(arrow-up-12-12.png);
+    background-position: center right;
+    background-repeat: no-repeat;
 }
+
 .slide-down {
-	background-image:url(arrow-down-12-12.png);
+    background-image: url(arrow-down-12-12.png);
 }
+
 .form-view-filter {
-	font-size:0.9em;
-	padding:0.5%;
-	float:left;
-	margin:0.5%;
+    font-size: 0.9em;
+    padding: 0.5%;
+    float: left;
+    margin: 0.5%;
 }
+
 .form-view-filter h4 {
     margin: 0 0 0.2em;
 }
+
 .form-view-filter ul,
 .form-view-filter li {
-	list-style: none;
-	padding:0;
-	margin:0;
-	overflow:auto;
-	font-size:0.9em
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    font-size: 0.9em
 }
+
 .form-view-filter li {
-	padding:1%;
-	text-indent: 0;
+    padding: 1%;
+    text-indent: 0;
 }
+
 .form-view-filter a,
 .form-view-filter a:visited {
-	border-radius: 3px;
-	display: block;
-	float:left;
-	text-decoration: none;
-	padding: 1% 2.5%;
-	background-color:rgba(0, 0, 0, 0.04);
-	box-shadow: 1px 1px 1px #666;
+    border-radius: 3px;
+    display: block;
+    float: left;
+    text-decoration: none;
+    padding: 1% 2.5%;
+    background-color: rgba(0, 0, 0, 0.04);
+    box-shadow: 1px 1px 1px #666;
 }
+
 .form-view-filter a:hover,
 .form-view-filter a.form-view-onfilter {
-	background-color: rgba(0,0,0,0.6);
-	color: white;
-	box-shadow: none;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    box-shadow: none;
 }
+
 .form-view-table {
-	font-size: smaller;
-    
+    font-size: smaller;
     border-spacing: 0;
     border: none;
 }
+
 .form-view-table tbody tr {
-    background-color:#fff;
+    background-color: #fff;
 }
+
 .form-view-table tbody tr:nth-child(2n) {
-    background-color:#f5f5f5;
+    background-color: #f5f5f5;
 }
 
 .form-view-table th,
 .form-view-table td {
     border: none;
     border-bottom: 1px solid #ddd;
-    /*border-right: 1px solid #f5f5f5;*/
 }
 
 .form-view-table td + td {
@@ -160,21 +286,17 @@ div.formerror { color:#aa0000; }
 }
 
 .form-view-table th {
-	padding:0;
+    padding: 0;
     position: relative;
     height: 8em;
     vertical-align: middle;
     overflow: hidden;
 }
-/*
-.form-view-table th h4 {
-    margin: 0;
-}
-*/
+
 .form-view-table th a {
-	display:block;
-	padding:0.5em 20px 0.5em 0.5em;
-        text-decoration:none;
+    display: block;
+    padding: 0.5em 20px 0.5em 0.5em;
+    text-decoration: none;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -183,6 +305,7 @@ div.formerror { color:#aa0000; }
     padding-right: 1.6em;
     transition: all 0.4s;
 }
+
 .form-view-table th a:hover,
 .form-view-table tbody tr:hover {
     background-color: #ffc !important;
@@ -193,26 +316,21 @@ div.formerror { color:#aa0000; }
     padding: 1em 0.5em;
 }
 
-/*
-.form-view-table .row-hover {
-	background-color:#FFFF99;
-}
-*/
-
 .view-sort,
 .view-sort-descending,
 .view-sort:visited,
 .view-sort-descending:visited {
-	background-color:#FF9;
-	background-image:url(arrow-down-12-12-white.png);
-	background-image:url(arrow-down-12-12.png);
-	background-repeat:no-repeat;
-	background-position:center right;
-	padding-right:16px;
+    background-color: #ff9;
+    /*background-image: url(arrow-down-12-12-white.png);*/
+    background-image: url(arrow-down-12-12.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 16px;
 }
+
 .view-sort-descending {
-	background-image:url(arrow-up-12-12-white.png);
-	background-image:url(arrow-up-12-12.png);
+    /*background-image:url(arrow-up-12-12-white.png);*/
+    background-image:url(arrow-up-12-12.png);
 }
 
 /*******************************************************************************
@@ -225,55 +343,6 @@ div.formerror { color:#aa0000; }
     font-size: larger;
     font-family: inherit;
 }
-/*.button.default,
-.form .submit-button,
-.form .confirm-button,
-.form .back-button,
-.view-option a,
-.view-option a:hover {
-	background-color:rgb(199,80,0);
-	background-image: linear-gradient(bottom, rgb(199,80,0) 37%, rgb(224,121,69) 100%, rgb(207,95,20) 100%);
-	background-image: -o-linear-gradient(bottom, rgb(199,80,0) 37%, rgb(224,121,69) 100%, rgb(207,95,20) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(199,80,0) 37%, rgb(224,121,69) 100%, rgb(207,95,20) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(199,80,0) 37%, rgb(224,121,69) 100%, rgb(207,95,20) 100%);
-	background-image: -ms-linear-gradient(bottom, rgb(199,80,0) 37%, rgb(224,121,69) 100%, rgb(207,95,20) 100%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.37, rgb(199,80,0)),
-		color-stop(1, rgb(224,121,69)),
-		color-stop(1, rgb(207,95,20))
-	);
-	border-radius:3px;
-	box-shadow:0 0 1px #666;
-	border:1px solid #777;
-	margin:0.5em 0.5em;
-    color:#fff;
-    padding:0.75em 2em;
-    text-decoration: none;
-	display:inline-block;
-}
-.button.default:hover,
-.form .submit-button:hover,
-.form .confirm-button:hover,
-.form .back-button:hover,
-.view-option a:hover {
-	cursor:pointer;
-	box-shadow:0 0 2px #000;
-	border:1px solid #333;
-}
-
-
-
-.view-option a,
-.view-option a:hover {
-	margin-top:0;
-	margin-bottom:0;
-}
-*/
-/*#form-export-cvs { font-size:0.85em; }*/
 
 .button,
 .button:hover, 
@@ -293,27 +362,11 @@ div.formerror { color:#aa0000; }
     cursor: pointer;
     transition: all 0.25s;
 }
-/*.button:after {
-    content: " ";
-    display: block;
-    background-color: rgba(0,0,0,0.15);
-    opacity: 1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-radius: 4px;
-    transition: all 0.4s;
-}
-.button:hover:after,
-.button:focus:after {
-    background-color: rgba(0,0,0,0);
-    opacity: 0;
-}*/
+
 .button.button--reject {
     background-color: #b10000;
 }
+
 .button.button--reject:hover,
 .button.button--reject:focus {
     background-color: #cf1111;
@@ -321,14 +374,16 @@ div.formerror { color:#aa0000; }
 
 .button.button--approve {
 }
+
 .button.button--approve:hover,
 .button.button--approve:focus {
-    background-color:#0880d7;
+    background-color: #0880d7;
 }
 
 .button.button--continue {
 }
+
 .button.button--continue:hover,
 .button.button--continue:focus {
-    background-color:#0880d7;
+    background-color: #0880d7;
 }

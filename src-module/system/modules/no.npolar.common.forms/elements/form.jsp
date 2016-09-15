@@ -28,9 +28,10 @@
 
 public void printForm(JspWriter w, Form f, String msg, boolean requestFileIsForm) throws IOException {
     w.println("<h" + (requestFileIsForm ? "1" : "2") + ">" + f.getTitle() + "</h" + (requestFileIsForm ? "1" : "2") + ">");
-    w.println("<div class=\"information\">" + f.getInformation() + "</div>");
-    if (msg != null)
+    w.println("<div class=\"form_text form_text--before-form\">" + f.getInformation() + "</div>");
+    if (msg != null) {
         w.print("<div class=\"formerror box message\">" + msg + "</div>");
+    }
     w.print(f.getHtml(true));
 }
 
@@ -267,7 +268,9 @@ if (cms.template("main")) {
                 if (form.getConfirmText() == null || form.getConfirmText().isEmpty())
                     out.println("<h3>" + REVIEW_HEADING + "</h3><p><em>" + CONFIRM_INFO + "</em><p>"); // Default text
                 else {
+                    out.println("<div class=\"form_text form_text--before-form\">");
                     out.println(form.getConfirmText());
+                    out.println("</div>");
                 }
             }
             out.println(form.getPreview());
@@ -394,7 +397,10 @@ if (cms.template("main")) {
                 if (form.getSuccessText() == null || form.getSuccessText().isEmpty()) {
                     out.print("<h3>" + ACCEPTED + "</h3>"); // Default text
                 } else {
+                    // ToDo: Allow more macros...
+                    out.println("<div class=\"form_text form_text--before-form\">");
                     out.println(form.getSuccessText().replaceAll("%\\(id\\)", String.valueOf(lastInsertedId)));
+                    out.println("</div>");
                 }
                 
                 
