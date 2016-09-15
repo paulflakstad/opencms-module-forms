@@ -1,0 +1,30 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+	<xsd:include schemaLocation="opencms://opencms-xmlcontent.xsd"/>		
+	<xsd:element name="FormInputOptions" type="OpenCmsFormInputOptions"/>
+	
+	<xsd:complexType name="OpenCmsFormInputOptions">
+		<xsd:sequence>
+			<xsd:element name="FormInputOption" type="OpenCmsFormInputOption" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OpenCmsFormInputOption">
+            <xsd:sequence>
+                <xsd:element name="Value" type="OpenCmsString" />
+                <xsd:element name="Text" type="OpenCmsString" />
+                <xsd:element name="Selected" type="OpenCmsBoolean" default="false" />
+            </xsd:sequence>
+            <xsd:attribute name="language" type="OpenCmsLocale" use="optional" />
+	</xsd:complexType>
+        
+        <xsd:annotation>
+            <xsd:appinfo>
+                <resourcebundle name="no.npolar.common.form.workplace"/>
+                <validationrules>
+                    <rule element="Value" regex="[a-zA-Z0-9_.]*" type= "warning" message="The option value must be a single word constructed from letters and/or digits, no special characters or whitespace. Use of underscore (_) is allowed."/>
+                </validationrules>
+            </xsd:appinfo>
+	</xsd:annotation> 
+	  
+</xsd:schema>

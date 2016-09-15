@@ -1,0 +1,58 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:include schemaLocation="opencms://opencms-xmlcontent.xsd" />		
+    <xsd:include schemaLocation="opencms://system/modules/no.npolar.common.forms/schemas/form-input-option.xsd" />
+
+    <xsd:group name="nonOptionsGroup">
+        <xsd:sequence>
+            <xsd:element name="Constraint" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="Value" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="Length" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:element name="FormInputs" type="OpenCmsFormInputs" />
+
+    <xsd:complexType name="OpenCmsFormInputs">
+        <xsd:sequence>
+            <xsd:element name="FormInput" type="OpenCmsFormInput" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OpenCmsFormInput">
+        <xsd:sequence>
+            <xsd:element name="Information" type="OpenCmsHtml" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="Type" type="OpenCmsString" />
+            <xsd:element name="Name" type="OpenCmsString" />
+            <xsd:element name="Label" type="OpenCmsString" />
+            <xsd:element name="Required" type="OpenCmsBoolean" default="false" />
+            <xsd:element name="Unique" type="OpenCmsBoolean" default="false" />
+            <xsd:element name="Constraint" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="HelpText" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="Value" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="Length" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="Options" type="OpenCmsFormInputOption" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <!--<xsd:choice>
+            <xsd:group ref="nonOptionsGroup" />
+            <xsd:element name="Options" type="OpenCmsFormInputOption" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:choice>-->
+        <xsd:attribute name="language" type="OpenCmsLocale" use="optional" />
+    </xsd:complexType>
+
+    <xsd:annotation>
+        <xsd:appinfo>
+            <resourcebundle name="no.npolar.common.form.workplace"/>
+            <layouts>
+                <layout element="Type" widget="SelectorWidget" configuration="Text|Text-area|Drop-down|Checkbox|Radiobutton|Date-time|Country"/>
+                <layout element="Information" widget="HtmlWidget" configuration="height:100px,link,source,format"/>
+                <layout element="Constraint" widget="SelectorWidget" configuration="EmailAddressConstraint|DateTimeFormatConstraint|NumericConstraint" />
+            </layouts>
+            <validationrules>
+                <!--<rule element="Name" regex="!.*\s.*" type= "warning" message="No whitespace allowed"/>-->
+                <rule element="Name" regex="[a-zA-Z0-9_.]*" type= "warning" message="Form element names must be a single word constructed from letters and/or digits, no special characters or whitespace. Use of underscore (_) is allowed."/>
+            </validationrules>
+        </xsd:appinfo>
+    </xsd:annotation>
+	  
+</xsd:schema>

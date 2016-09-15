@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : opencms-forms.xml
+    Created on : 29. januar 2009, 09:54
+    Author     : Paul-Inge Flakstad, Norwegian Polar Institute
+    Description: Database settings for the forms module no.npolar.common.forms.
+        
+                 This file should always be flagged as "internal" in OpenCms!
+-->
+<form-config>
+    <database>
+        <host>localhost</host>
+        <port>3306</port>
+        <name>forms_opencms</name>
+        <username>your_username</username>
+        <password>your_password</password>
+    </database>
+</form-config>

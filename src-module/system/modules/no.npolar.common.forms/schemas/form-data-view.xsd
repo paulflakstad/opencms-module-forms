@@ -1,0 +1,73 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+	<xsd:include schemaLocation="opencms://opencms-xmlcontent.xsd"/>		
+	<xsd:include schemaLocation="opencms://system/modules/no.npolar.common.forms/schemas/form-email-conf.xsd"/>
+        
+	<xsd:element name="FormDataViews" type="OpenCmsFormDataViews"/>
+	
+	<xsd:complexType name="OpenCmsFormDataViews">
+		<xsd:sequence>
+			<xsd:element name="FormDataView" type="OpenCmsFormDataView" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OpenCmsFormDataView">
+            <xsd:sequence>
+                <xsd:element name="Title" type="OpenCmsString" />
+                <xsd:element name="Text" type="OpenCmsHtml" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="ListText" type="OpenCmsHtml" />
+                <xsd:element name="ListEmptyText" type="OpenCmsHtml" />
+                <xsd:element name="FormPath" type="OpenCmsVfsFile" />
+                <xsd:element name="TableClass" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="OrderBy" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="AvailableFields" type="OpenCmsString" />
+                <xsd:element name="FieldsView" type="OpenCmsString" />
+                <xsd:element name="FieldsFilter" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="FieldsAdminFilter" type="OpenCmsString" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="FieldsEntryTitle" type="OpenCmsString" /><!-- The field(s) to use when generating the title for a single row -->
+                <xsd:element name="EntryDetailTemplate" type="OpenCmsVfsFile" minOccurs="0" maxOccurs="1" /><!-- A file that will be used as the detail view for individual entries -->
+                <xsd:element name="MassEmail" type="OpenCmsFormEmailConfig" minOccurs="0" maxOccurs="1" />
+            </xsd:sequence>
+            <xsd:attribute name="language" type="OpenCmsLocale" use="optional" />
+	</xsd:complexType>
+        
+        <xsd:annotation>
+            <xsd:appinfo>
+                <resourcebundle name="no.npolar.common.forms.workplace"/>
+		<defaults>
+		    <!--<default element="ListText" value="Listing \\%(list.count) matches:" />-->
+                    <default element="ListText" value="%(key.no.npolar.common.form.list)" />
+		    <default element="ListEmptyText" value="%(key.no.npolar.common.form.list.empty)" />
+		</defaults>
+                <mappings>
+                    <mapping element="Title" mapto="property:Title" />
+                </mappings>
+                <layouts>
+                    <layout element="Text" widget="HtmlWidget" configuration="height:150px,format,source,link"/>
+                    <layout element="ListText" widget="HtmlWidget" configuration="height:150px,format,source,link"/>
+                    <layout element="ListEmptyText" widget="HtmlWidget" configuration="height:150px,format,source,link"/>
+                    <layout element="FormPath" widget="VfsFileWidget" />
+                    <layout element="EntryDetailTemplate" widget="VfsFileWidget" />
+                    <!--<layout element="FieldsView" widget="no.npolar.common.forms.view.FormFieldSelectWidget" />-->
+                    <layout element="AvailableFields" widget="no.npolar.common.forms.view.FormFieldListWidget" />
+                </layouts>
+                <searchsettings>                    
+                    <searchsetting element="Title" searchcontent="false" />
+                    <searchsetting element="Text" searchcontent="false" />
+                    <searchsetting element="ListText" searchcontent="false" />
+                    <searchsetting element="ListEmptyText" searchcontent="false" />
+                    <searchsetting element="FormPath" searchcontent="false" />
+                    <searchsetting element="TableClass" searchcontent="false" />
+                    <searchsetting element="OrderBy" searchcontent="false" />
+                    <searchsetting element="FieldsView" searchcontent="false" />
+                    <searchsetting element="FieldsFilter" searchcontent="false" />
+                    <searchsetting element="FieldsAdminFilter" searchcontent="false" />
+                    <searchsetting element="FieldsEntryTitle" searchcontent="false" />
+                    <searchsetting element="EntryDetailTemplate" searchcontent="false" />
+                    <searchsetting element="MassEmail" searchcontent="false" />
+                    <searchsetting element="AvailableFields" searchcontent="false" />
+                </searchsettings>
+            </xsd:appinfo>
+	</xsd:annotation> 
+	  
+</xsd:schema>
