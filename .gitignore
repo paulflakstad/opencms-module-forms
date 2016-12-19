@@ -51,6 +51,7 @@ Temporary Items
 WEB-INF
 META-INF
 */build.xml
+*/manifest.mf
 
 # SVN
 *.svn
