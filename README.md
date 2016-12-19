@@ -16,6 +16,5 @@ Multilanguage support is so-so. You _can_ get away with mixing multiple language
 Because each form is strongly tied to a database table, there are a few things you'll need to know.
 
 You should have some SQL knowledge, as you may have to perform basic database operations. This is true in particular if you want to: 
-- Make fundamental changes to the form. For example, adding a new input field, or changing the type of an existing field, requires modifying the form's backing database table. (You can avoid this situation by making a copy of the form instead of changing it, but this will result in two backing database tables / two separate sets of data.)
-- Delete a form's backing database table (typically relevant only when deleting the form itself).
-
+- Make fundamental changes to a form that has already collected data at least once. For example, if you add a new field to your form, or change the type of an existing field, you will make the form and its backing table incompatible. To fix the incompatibility, you'll need to modify the form's backing database table manually. Alternatively, to avoid making such changes, you can make a copy of the form instead of changing it. (This is especially relevant if you're changing the type of an existing field, but note that it will result in a new backing database table, so your old and new data will now be separated.) If you're adding/removing fields, modifying the database table is recommended.
+- Delete a form's backing database table. This is typically relevant only when deleting its associated form.
