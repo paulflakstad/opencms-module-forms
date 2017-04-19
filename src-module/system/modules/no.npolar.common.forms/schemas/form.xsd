@@ -43,6 +43,7 @@
                 <mappings>
                     <mapping element="Title" mapto="property:Title" />
                     <mapping element="Information" mapto="property:Description" />
+                    <mapping element="Expires" mapto="property:expires" />
                 </mappings>
                 <layouts>
                     <layout element="Information" widget="HtmlWidget" configuration="height:150px,formatselect,source,link"/>
