@@ -339,17 +339,18 @@ h1 + .form_text {
  *
  */
 .form .submit button {
-    margin: 0.25em;
-    font-size: larger;
-    font-family: inherit;
+    /*margin: 0.25em;*/
+    /*font-size: larger;*/
+    /*font-family: inherit;*/
 }
 
-.button,
-.button:hover, 
-.button:focus {
+.form .button,
+.form .button:hover, 
+.form .button:focus {
     display: inline-block;
     text-decoration: none;
     text-align: center;
+    font-family: inherit;
     font-size: larger;
     padding: 0.5em 1em;
     margin: 1em;
@@ -363,27 +364,27 @@ h1 + .form_text {
     transition: all 0.25s;
 }
 
-.button.button--reject {
+.form .button.button--reject {
     background-color: #b10000;
 }
 
-.button.button--reject:hover,
-.button.button--reject:focus {
+.form .button.button--reject:hover,
+.form .button.button--reject:focus {
     background-color: #cf1111;
 }
 
-.button.button--approve {
+.form .button.button--approve {
 }
 
-.button.button--approve:hover,
-.button.button--approve:focus {
+.form .button.button--approve:hover,
+.form .button.button--approve:focus {
     background-color: #0880d7;
 }
 
-.button.button--continue {
+.form .button.button--continue {
 }
 
-.button.button--continue:hover,
-.button.button--continue:focus {
+.form .button.button--continue:hover,
+.form .button.button--continue:focus {
     background-color: #0880d7;
 }
