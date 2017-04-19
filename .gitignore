@@ -47,16 +47,22 @@ Temporary Items
 .apdisk
 
 # IDE & frameworks
+nbproject/*
 */nbproject/*
 WEB-INF
 META-INF
+build.xml
+manifest.mf
 */build.xml
 */manifest.mf
 
 # SVN
 *.svn
-/src-lib/no.npolar.common.forms.bak01/nbproject/private/
-/src-lib/no.npolar.common.forms/nbproject/private/
+#/src-lib/no.npolar.common.forms.bak01/nbproject/private/
+#/src-lib/no.npolar.common.forms/nbproject/private/
 
 # Config testers
 **/config/config-reader.jsp
+#/nbproject/private/
+/build/
+/dist/
