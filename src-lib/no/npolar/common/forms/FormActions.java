@@ -38,9 +38,13 @@ import org.opencms.file.CmsObject;
  * @author Paul-Inge Flakstad, Norwegian Polar Institute
  */
 public class FormActions implements I_CmsModuleAction, I_CmsEventListener {
-    public void initialize(CmsObject adminCms, CmsConfigurationManager configurationManager, CmsModule module) {
+    /** Stores the CmsObject passed to initialize(...). */
+    private CmsObject adminCmso;
+    
+    public void initialize(CmsObject adminCmso, CmsConfigurationManager configurationManager, CmsModule module) {
         // Do nothing
         OpenCms.getEventManager().addCmsEventListener(this);
+        this.adminCmso = adminCmso;
     }
     
     public void moduleUninstall(CmsModule module) {
@@ -67,31 +71,37 @@ public class FormActions implements I_CmsModuleAction, I_CmsEventListener {
             //e.getType() == I_CmsEventListener.EVENT_RESOURCE_MOVED
             
             // Get the source resource
-            CmsResource r = (CmsResource)e.getData().get("resource");
+            CmsResource r = (CmsResource)e.getData().get(I_CmsEventListener.KEY_RESOURCE);//"resource"
             if (r != null) {
                 try {
                     int formTypeId = OpenCms.getResourceManager().getResourceType("np_form").getTypeId();
                     if (r.getTypeId() == formTypeId) {
                         // Delete the DB table:
+                        /*
                         CmsDefaultUsers defaultUsers = new CmsDefaultUsers();
                         CmsObject cmso = null;
                         CmsUser user = null;
                         CmsProject project = null;
+                        //*/
                         try {
+                            /*
                             cmso = OpenCms.initCmsObject(defaultUsers.getUserGuest());
                             user = cmso.getRequestContext().currentUser();
                             //cmso.loginUser("theuser", "thepassword");
                             project = cmso.getRequestContext().setCurrentProject(cmso.readProject("Offline"));
+                            //*/
+                            adminCmso.getRequestContext().setCurrentProject(adminCmso.readProject("Offline"));
+                            //adminCmso.getRequestContext().setSiteRoot(OpenCms.initCmsObject(defaultUsers.getUserGuest()).getRequestContext().getSiteRoot());
                             //cmso.getRequestContext().setSiteRoot("/sites/default");
                         } catch (CmsException cmse) {
                             throw new  NullPointerException("Error initializing CmsObject / user / project upon capturing event 'resource deleted': " + cmse.getMessage());
                         }
 
                         try {
-                            Form form = new Form(cmso.getSitePath(r), cmso);
+                            Form form = new Form(adminCmso.getSitePath(r), adminCmso);
                             form.deleteData();
                         } catch (Exception dele) {
-                            throw new NullPointerException("An error occurred when attempting to delete form data for \"" + cmso.getSitePath(r) + "\": " + dele.getMessage());
+                            throw new NullPointerException("An error occurred when attempting to delete form data for \"" + r.getRootPath() + "\": " + dele.getMessage());
                         }
                     } // if (resource type == form)
                 } catch (CmsLoaderException cle) {
